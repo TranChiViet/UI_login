@@ -1,5 +1,5 @@
 import 'package:first_project/constant/constant_export.dart';
-import 'package:first_project/screens/forgot_password/cubit/fotgot_password_cubit.dart';
+
 import 'package:first_project/widgets/image_logo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -26,39 +26,36 @@ class ForgotPasswordPage extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Padding(
-                padding: const EdgeInsets.symmetric(vertical: 16.0),
+              const Padding(
+                padding: EdgeInsets.symmetric(vertical: 16.0),
                 child: Text('Quên mật khẩu',
-                    style: TextStyleApp.txt_robo_24_black_w500),
+                    style: TxtStyle.txt_robo_24_black_w500),
               ),
               RichText(
-                text: TextSpan(children: [
+                text: const TextSpan(children: [
                   TextSpan(
                     text: 'Vui lòng nhập',
-                    style: TextStyleApp.txt_robo_16_black_w400,
+                    style: TxtStyle.txt_robo_16_black_w400,
                   ),
                   TextSpan(
                     text: ' Số điện thoại ',
-                    style: TextStyleApp.txt_robo_16_black_w600,
+                    style: TxtStyle.txt_robo_16_black_w600,
                   ),
                   TextSpan(
                     text: 'của bạn',
-                    style: TextStyleApp.txt_robo_16_black_w400,
+                    style: TxtStyle.txt_robo_16_black_w400,
                   ),
                 ]),
               ),
               Form(
                 key: _formKey,
-                child: BlocBuilder<ForgotPasswordCubit, ForgotPasswordState>(
-                  builder: (context, state) {
-                    bool correctPhone = state.correctPhone;
-                    return Column(
+                child: Column(
                       children: [
                         
                         TextFieldBase(
                           label: 'Số điện thoại',
                           hintText: 'Nhập số điện thoại',
-                          correct: correctPhone,
+                          keyboardType: TextInputType.number,
                           validator: (value) {
                             // if (value == null || value.length < 8) {
                             //   return context
@@ -71,12 +68,6 @@ class ForgotPasswordPage extends StatelessWidget {
                             // }
                           },
                         ),
-                        correctPhone
-                            ? const Text('')
-                            : Text(
-                                'Nhập lại số điện thoại',
-                                style: TextStyleApp.txt_robo_16_red_w400,
-                              ),
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 16.0),
                           child: ElevatedButtonBase(
@@ -93,9 +84,7 @@ class ForgotPasswordPage extends StatelessWidget {
                           ),
                         ),
                       ],
-                    );
-                  },
-                ),
+                    ),
               ),
               const BackTextButtonBase(),
             ],

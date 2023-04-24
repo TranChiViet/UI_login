@@ -21,8 +21,8 @@ class TextButtonBase extends StatelessWidget {
       child: Text(
         text,
         style: enableColor == true
-            ? TextStyleApp.txt_robo_16_blue_w400
-            : TextStyleApp.btn_robo_16_grey_w400,
+            ? TxtStyle.txt_robo_16_blue_w400
+            : TxtStyle.btn_robo_16_grey_w400,
       ),
     );
   }

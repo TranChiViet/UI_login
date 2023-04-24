@@ -38,7 +38,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
               padding: const EdgeInsets.all(20.0),
               child: Text(
                 'Hiển Thị Ứng Dụng Bằng',
-                style: TextStyleApp.txt_robo_20_blue_w600,
+                style: TxtStyle.txt_robo_20_blue_w600,
               ),
             ),
             Padding(
@@ -78,7 +78,7 @@ class _LanguageScreenState extends State<LanguageScreen> {
                               ),
                               Text(
                                 _listLanguage[index].nation,
-                                style: TextStyleApp.txt_robo_18_black_w500,
+                                style: TxtStyle.txt_robo_18_black_w500,
                               )
                             ]),
                           ),

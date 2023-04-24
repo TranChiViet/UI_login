@@ -71,11 +71,11 @@ class _IntroScreenState extends State<IntroScreen> {
                       Padding(
                         padding: const EdgeInsets.only(bottom: 30, top: 20),
                         child: Text(_listIntro[index].title,
-                            style: TextStyleApp.txt_robo_20_blue_w600),
+                            style: TxtStyle.txt_robo_20_blue_w600),
                       ),
                       Text(_listIntro[index].description,
                           textAlign: TextAlign.center,
-                          style: TextStyleApp.txt_robo_16_grey_w400)
+                          style: TxtStyle.txt_robo_16_grey_w400)
                     ],
                   );
                 },

@@ -5,11 +5,12 @@ import 'package:flutter/material.dart';
 class TextFieldBase extends StatelessWidget {
   final String label;
   final String hintText;
-  final Function(String)? onChanged;
+  final String? errorText;
+  final ValueChanged<String>? onChanged;
   final String? Function(String?)? validator;
   final bool? obscureText;
-  final bool? correct;
-  // final bool? phoneType;
+  final bool enable;
+  final TextInputType? keyboardType;
   final Widget? suffix;
   final TextEditingController? controller;
   const TextFieldBase({
@@ -21,8 +22,9 @@ class TextFieldBase extends StatelessWidget {
     required this.hintText,
     this.suffix,
     this.obscureText = false,
-    this.correct = true,
-    // this.phoneType = false,
+    this.enable = true,
+    this.keyboardType,
+    this.errorText,
   });
 
   @override
@@ -38,11 +40,11 @@ class TextFieldBase extends StatelessWidget {
               text: TextSpan(children: [
                 TextSpan(
                   text: label,
-                  style: TextStyleApp.txt_robo_16_black_w500,
+                  style: TxtStyle.txt_robo_16_black_w500,
                 ),
                 TextSpan(
                   text: ' *',
-                  style: TextStyleApp.txt_robo_16_red_w400,
+                  style: TxtStyle.txt_robo_16_red_w400,
                 ),
               ]),
             ),
@@ -66,37 +68,45 @@ class TextFieldBase extends StatelessWidget {
               obscureText: obscureText!,
               onChanged: onChanged,
               validator: validator,
+              keyboardType: keyboardType,
               cursorColor: ColorApp.colorTitleBlue,
-              style: TextStyleApp.txt_robo_16_blue_w400,
+              style: TxtStyle.txt_robo_16_blue_w400,
               decoration: InputDecoration(
                   hintText: hintText,
-                  hintStyle: TextStyleApp.txt_robo_16_grey_w400,
+                  hintStyle: TxtStyle.txt_robo_16_grey_w400,
                   suffixIcon: suffix,
+                  enabled: enable,
                   contentPadding:
                       const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                  focusedBorder: _borderFocus(correct!),
-                  enabledBorder: _borderEnable(correct!),
-                  border: _borderEnable(correct!)),
+                  focusedBorder: _borderFocus(errorText!),
+                  enabledBorder: _borderEnable(errorText!),
+                  border: _borderEnable(errorText!)),
               // keyboardType: TextInputType.number,
             ),
-          )
+          ),
+          if (errorText != null)
+            Padding(
+              padding: const EdgeInsets.only(top: 4.0),
+              child: Text(errorText!,
+                  style: enable ? TxtStyle.txt_robo_16_red_w400 : TxtStyle.txt_robo_16_grey_w400),
+            )
         ],
       ),
     );
   }
 
-  InputBorder _borderFocus(bool correct) {
+  InputBorder _borderFocus(String errorText) {
     return OutlineInputBorder(
         borderSide: BorderSide(
-            color: correct ? ColorApp.colorTitleBlue : ColorApp.colorTitleRed,
+            color: errorText != null ? ColorApp.colorTitleBlue : ColorApp.colorTitleRed,
             width: 2),
         borderRadius: BorderRadius.circular(16));
   }
 
-  InputBorder _borderEnable(bool correct) {
+  InputBorder _borderEnable(String errorText) {
     return OutlineInputBorder(
         borderSide: BorderSide(
-            color: correct
+            color: errorText != null
                 ? ColorApp.colorTitleBlack.withOpacity(0.1)
                 : ColorApp.colorTitleRed,
             width: 1),

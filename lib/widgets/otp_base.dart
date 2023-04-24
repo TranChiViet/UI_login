@@ -47,9 +47,12 @@ Widget buildSizeBox(BuildContext ctx, String pin) {
         if (value.length == 1) {
           FocusScope.of(ctx).nextFocus();
         }
+        if (value.isEmpty) {
+          FocusScope.of(ctx).previousFocus();
+        }
       },
       decoration: InputDecoration(
-        hintStyle: TextStyleApp.txt_robo_16_grey_w400,
+        hintStyle: TxtStyle.txt_robo_16_grey_w400,
         contentPadding:
             const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
         focusedBorder: _borderFocus(),

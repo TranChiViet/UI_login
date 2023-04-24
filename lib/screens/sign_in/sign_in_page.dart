@@ -2,27 +2,33 @@ import 'package:first_project/constant/constant_export.dart';
 
 import 'package:first_project/widgets/image_logo.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+
 
 import '../../widgets/elevated_button_base.dart';
 import '../../widgets/text_button_base.dart';
 import '../../widgets/text_field_base.dart';
 import '../forgot_password/forgot_password.dart';
 import '../sign_up/sign_up_page.dart';
-import 'cubit/sign_in_cubit.dart';
 
-class SignInPage extends StatelessWidget {
+class SignInPage extends StatefulWidget {
   SignInPage({super.key});
 
-  final _formKey = GlobalKey<FormState>();
+  @override
+  State<SignInPage> createState() => _SignInPageState();
+}
+
+class _SignInPageState extends State<SignInPage> {
+    final TextEditingController _phoneController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  bool _obscurePassword = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorApp.colorWhite,
       body: Container(
         padding: const EdgeInsets.all(10),
-        child: Form(
-          key: _formKey,
+        child: SingleChildScrollView(
           child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -33,104 +39,67 @@ class SignInPage extends StatelessWidget {
                   padding: EdgeInsets.symmetric(vertical: 30.0),
                   child: ImageLogo(),
                 ),
-                BlocBuilder<SignInCubit, SignInState>(
-                  builder: (context, state) {
-                    bool showPassword = state.showPassword;
-                    bool correctPassword = state.correctPassword;
-                    bool correctPhone = state.correctPhone;
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.symmetric(vertical: 16.0),
+                      child: Text('Đăng nhập',
+                          style: TxtStyle.txt_robo_24_black_w500),
+                    ),
+                    TextFieldBase(
+                      controller: _phoneController,
+                      label: 'Số điện thoại',
+                      hintText: 'Nhập số điện thoại',
+                      keyboardType: TextInputType.number,
+                    ),
+                    TextFieldBase(
+                      controller: _passwordController,
+                      obscureText: _obscurePassword,
+                      label: 'Mật khẩu',
+                      hintText: 'Mật khẩu chứa ít nhất 8 kí tự',
+                      suffix: GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            _obscurePassword = !_obscurePassword;
+                          });
+                        },
+                        child: Image.asset(_obscurePassword
+                            ? 'assets/icons/hidden.png'
+                            : 'assets/icons/unhide.png'),
+                      ),
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
+                        TextButtonBase(
+                          text: 'Quên mật khẩu?',
+                          onPressed: () {
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        ForgotPasswordPage()));
+                          },
+                        ),
                         Padding(
                           padding: const EdgeInsets.symmetric(vertical: 16.0),
-                          child: Text('Đăng nhập',
-                              style: TextStyleApp.txt_robo_24_black_w500),
-                        ),
-                        TextFieldBase(
-                          label: 'Số điện thoại',
-                          hintText: 'Nhập số điện thoại',
-                          correct: correctPhone,
-                          validator: (value) {
-                            if (value!.isEmpty) {
-                              context.read<SignInCubit>().switchUnCorrectPhone();
-                            } else {
+                          child: ElevatedButtonBase(
+                            text: 'Đăng nhập',
+                            onPressed: () {
                               
-                              context.read<SignInCubit>().switchCorrectPhone();
-                            }
-                          },
-                        ),
-                        correctPhone
-                            ? const Text('')
-                            : Text(
-                                'Nhập lại số điện thoại',
-                                style: TextStyleApp.txt_robo_16_red_w400,
-                              ),
-                        TextFieldBase(
-                          obscureText: !showPassword,
-                          label: 'Mật khẩu',
-                          hintText: 'Mật khẩu chứa ít nhất 8 kí tự',
-                          correct: correctPassword,
-                          validator: (value) {
-                            if (value!.isEmpty || value.length < 8) {
-                              return context
-                                  .read<SignInCubit>()
-                                  .switchUnCorrectPass();
-                            } else {
-                              return context.read<SignInCubit>().switchCorrectPass();
-                              
-                            }
-                          },
-                          suffix: GestureDetector(
-                            onTap: () {
-                              context.read<SignInCubit>().switchObscure();
                             },
-                            child: Image.asset(showPassword
-                                ? 'assets/icons/unhide.png'
-                                : 'assets/icons/hidden.png'),
                           ),
                         ),
-                        correctPassword
-                            ? const Text('')
-                            : Text(
-                                'Nhập lại mật khẩu',
-                                style: TextStyleApp.txt_robo_16_red_w400,
-                              ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: [
-                            TextButtonBase(
-                              text: 'Quên mật khẩu?',
-                              onPressed: () {
-                                Navigator.pushReplacement(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                             ForgotPasswordPage()));
-                              },
-                            ),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(vertical: 16.0),
-                              child: ElevatedButtonBase(
-                                text: 'Đăng nhập',
-                                onPressed: () {
-                                  if (_formKey.currentState!.validate()) {
-                                  
-                                  }
-                                },
-                              ),
-                            ),
-                          ],
-                        ),
                       ],
-                    );
-                  },
+                    ),
+                  ],
                 ),
                 Column(
                   children: [
-                    Text(
+                    const Text(
                       'Bạn chưa có tài khoản?',
-                      style: TextStyleApp.txt_robo_16_grey_w500,
+                      style: TxtStyle.txt_robo_16_grey_w500,
                     ),
                     TextButtonBase(
                       text: 'Tạo tài khoản ngay',

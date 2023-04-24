@@ -29,7 +29,7 @@ class BackTextButtonBase extends StatelessWidget {
             ),
             Text(
               'Trở về đăng nhập',
-              style: TextStyleApp.btn_robo_16_orange_w400,
+              style: TxtStyle.btn_robo_16_orange_w400,
             ),
           ],
         ),

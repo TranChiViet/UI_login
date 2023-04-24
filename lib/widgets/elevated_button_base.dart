@@ -35,8 +35,8 @@ class ElevatedButtonBase extends StatelessWidget {
         child: Text(
           text,
           style: enableColor == true
-              ? TextStyleApp.txt_robo_16_white_w500
-              : TextStyleApp.txt_robo_16_blue_w500,
+              ? TxtStyle.txt_robo_16_white_w500
+              : TxtStyle.txt_robo_16_blue_w500,
         ),
       ),
     );
