@@ -7,7 +7,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../widgets/back_txt_btn_base.dart';
 import '../../widgets/elevated_button_base.dart';
 import '../../widgets/text_field_base.dart';
-import 'bloc/get_password_bloc.dart';
+import 'cubit/get_password_cubit.dart';
 
 class GetPasswordPage extends StatefulWidget {
   const GetPasswordPage({super.key});
@@ -28,7 +28,7 @@ class _GetPasswordPageState extends State<GetPasswordPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorApp.colorWhite,
-      body: BlocConsumer<GetPasswordBloc, GetPasswordState>(
+      body: BlocConsumer<GetPasswordCubit, GetPasswordState>(
         listener: (context, state) {
           if (state is InvalidNewPasswordState) {
             setState(() {
@@ -105,9 +105,9 @@ class _GetPasswordPageState extends State<GetPasswordPage> {
                       child: ElevatedButtonBase(
                         text: 'Lưu',
                         onPressed: () {
-                          BlocProvider.of<GetPasswordBloc>(context).add(
-                              GetPasswordEvent(_newPasswordController.text,
-                                  _passwordController.text));
+                          BlocProvider.of<GetPasswordCubit>(context).
+                              getPassword(_newPasswordController.text,
+                                  _passwordController.text);
                         },
                       ),
                     ),

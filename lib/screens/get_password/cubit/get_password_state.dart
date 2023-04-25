@@ -1,12 +1,11 @@
-part of 'get_password_bloc.dart';
+part of 'get_password_cubit.dart';
 
 abstract class GetPasswordState extends Equatable {
   const GetPasswordState();
-  
+
   @override
   List<Object> get props => [];
 }
-
 
 class InvalidNewPasswordState extends GetPasswordState {
   InvalidNewPasswordState(this.content);

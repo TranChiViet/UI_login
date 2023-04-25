@@ -1,8 +1,8 @@
-part of 'sign_up_bloc.dart';
+part of 'sign_up_cubit.dart';
 
 abstract class SignUpState extends Equatable {
   const SignUpState();
-  
+
   @override
   List<Object> get props => [];
 }
@@ -38,4 +38,5 @@ class InvalidPasswordState extends SignUpState {
 
   List<Object> get props => [content];
 }
+
 class SignUpInitial extends SignUpState {}

@@ -8,7 +8,7 @@ import '../../widgets/back_txt_btn_base.dart';
 import '../../widgets/elevated_button_base.dart';
 import '../../widgets/text_field_base.dart';
 import '../otp/otp_page.dart';
-import 'bloc/forgot_password_bloc.dart';
+import 'cubit/forgot_password_cubit.dart';
 
 class ForgotPasswordPage extends StatefulWidget {
   ForgotPasswordPage({super.key});
@@ -24,7 +24,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorApp.colorWhite,
-      body: BlocConsumer<ForgotPasswordBloc, ForgotPasswordState>(
+      body: BlocConsumer<ForgotPasswordCubit, ForgotPasswordState>(
         listener: (context, state) {
           if (state is InvalidPhoneState) {
             setState(() {
@@ -87,11 +87,8 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                         child: ElevatedButtonBase(
                           text: 'Gửi mã OTP',
                           onPressed: () {
-                            BlocProvider.of<ForgotPasswordBloc>(context)
-                                .add(ForgotPasswordEvent(
-                              _phoneController.text,
-                            ));
-                            
+                            BlocProvider.of<ForgotPasswordCubit>(context)
+                                .forgotPassword(_phoneController.text);
                           },
                         ),
                       ),

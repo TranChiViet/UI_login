@@ -1,14 +1,15 @@
 import 'package:first_project/screens/board/splash.dart';
-import 'package:first_project/screens/get_password/bloc/get_password_bloc.dart';
-import 'package:first_project/screens/otp/otp_page.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'screens/forgot_password/bloc/forgot_password_bloc.dart';
-import 'screens/otp/bloc/otp_bloc.dart';
-import 'screens/sign_in/bloc/sign_in_bloc.dart';
+import 'screens/forgot_password/cubit/forgot_password_cubit.dart';
+
+import 'screens/get_password/cubit/get_password_cubit.dart';
+import 'screens/otp/cubit/otp_cubit.dart';
+import 'screens/sign_in/cubit/sign_in_cubit.dart';
 import 'screens/sign_in/sign_in_page.dart';
-import 'screens/sign_up/bloc/sign_up_bloc.dart';
+import 'screens/sign_up/cubit/sign_up_cubit.dart';
 
 void main() {
   runApp(const MyApp());
@@ -21,11 +22,11 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider.value(value: SignInBloc()),
-        BlocProvider.value(value: SignUpBloc()),
-        BlocProvider.value(value: ForgotPasswordBloc()),
-        BlocProvider.value(value: OtpBloc()),
-        BlocProvider.value(value: GetPasswordBloc()),
+        BlocProvider.value(value: SignInCubit()),
+        BlocProvider.value(value: SignUpCubit()),
+        BlocProvider.value(value: ForgotPasswordCubit()),
+        BlocProvider.value(value: OtpCubit()),
+        BlocProvider.value(value: GetPasswordCubit()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,

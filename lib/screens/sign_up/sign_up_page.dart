@@ -6,7 +6,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../widgets/back_txt_btn_base.dart';
 import '../../widgets/elevated_button_base.dart';
 import '../../widgets/text_field_base.dart';
-import 'bloc/sign_up_bloc.dart';
+
+import 'cubit/sign_up_cubit.dart';
 
 class SignUpPage extends StatefulWidget {
   const SignUpPage({super.key});
@@ -30,7 +31,7 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorApp.colorWhite,
-      body: BlocConsumer<SignUpBloc, SignUpState>(
+      body: BlocConsumer<SignUpCubit, SignUpState>(
         listener: (context, state) {
           if (state is InvalidNameState) {
             setState(() {
@@ -128,11 +129,11 @@ class _SignUpPageState extends State<SignUpPage> {
                       child: ElevatedButtonBase(
                         text: 'Đăng nhập',
                         onPressed: () {
-                          BlocProvider.of<SignUpBloc>(context).add(SignUpEvent(
+                          BlocProvider.of<SignUpCubit>(context).signup(
                               _nameController.text,
                               _phoneController.text,
                               _passwordController.text,
-                              _rePasswordController.text));
+                              _rePasswordController.text);
                         },
                       ),
                     ),

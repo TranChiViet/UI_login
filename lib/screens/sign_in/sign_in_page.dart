@@ -9,7 +9,8 @@ import '../../widgets/text_button_base.dart';
 import '../../widgets/text_field_base.dart';
 import '../forgot_password/forgot_password.dart';
 import '../sign_up/sign_up_page.dart';
-import 'bloc/sign_in_bloc.dart';
+import 'cubit/sign_in_cubit.dart';
+
 
 class SignInPage extends StatefulWidget {
   SignInPage({super.key});
@@ -18,25 +19,18 @@ class SignInPage extends StatefulWidget {
   State<SignInPage> createState() => _SignInPageState();
 }
 
-
 class _SignInPageState extends State<SignInPage> {
   final TextEditingController _phoneController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   String _phoneErrorText = '';
   String _passwordErrorText = '';
   bool _obscurePassword = true;
-  
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorApp.colorWhite,
-      body: BlocConsumer<SignInBloc, SignInState>(
+      body: BlocConsumer<SignInCubit, SignInState>(
         listener: (context, state) {
           if (state is InvalidPhoneState) {
             setState(() {
@@ -120,10 +114,10 @@ class _SignInPageState extends State<SignInPage> {
                               child: ElevatedButtonBase(
                                 text: 'Đăng nhập',
                                 onPressed: () {
-                                  BlocProvider.of<SignInBloc>(context).add(
-                                      SignInEvent(
+                                  BlocProvider.of<SignInCubit>(context).
+                                      signin(
                                            _phoneController.text,
-                                          _passwordController.text));
+                                          _passwordController.text);
                                 },
                               ),
                             ),

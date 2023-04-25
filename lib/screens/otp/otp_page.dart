@@ -8,7 +8,7 @@ import '../../widgets/elevated_button_base.dart';
 import '../../widgets/otp_base.dart';
 import '../../widgets/text_button_base.dart';
 import '../get_password/get_password_page.dart';
-import 'bloc/otp_bloc.dart';
+import 'cubit/otp_cubit.dart';
 
 class OtpPage extends StatefulWidget {
   const OtpPage({super.key});
@@ -27,7 +27,7 @@ class _OtpPageState extends State<OtpPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: ColorApp.colorWhite,
-      body: BlocConsumer<OtpBloc, OtpState>(
+      body: BlocConsumer<OtpCubit, OtpState>(
         listener: (context, state) {
           if (state is InvalidOtpState) {
             _errorPin = state.content;
@@ -101,13 +101,13 @@ class _OtpPageState extends State<OtpPage> {
                               child: ElevatedButtonBase(
                                 text: 'Xác thực',
                                 onPressed: () {
-                                   BlocProvider.of<OtpBloc>(context)
-                                .add(OtpEvent(
+                                   BlocProvider.of<OtpCubit>(context)
+                                .otp(
                               _pin1Controller.text,
                               _pin2Controller.text,
                               _pin3Controller.text,
                               _pin4Controller.text,
-                            ));
+                            );
                                 },
                               ),
                             ),

@@ -1,4 +1,4 @@
-part of 'otp_bloc.dart';
+part of 'otp_cubit.dart';
 
 abstract class OtpState extends Equatable {
   const OtpState();
