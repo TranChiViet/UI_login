@@ -5,9 +5,8 @@ import 'package:flutter/material.dart';
 class TextFieldBase extends StatelessWidget {
   final String label;
   final String hintText;
-  final String? errorText;
+  final String errorText;
   final ValueChanged<String>? onChanged;
-  final String? Function(String?)? validator;
   final bool? obscureText;
   final bool enable;
   final TextInputType? keyboardType;
@@ -18,13 +17,12 @@ class TextFieldBase extends StatelessWidget {
     required this.label,
     this.controller,
     this.onChanged,
-    this.validator,
     required this.hintText,
     this.suffix,
     this.obscureText = false,
     this.enable = true,
     this.keyboardType,
-    this.errorText,
+    this.errorText = '',
   });
 
   @override
@@ -67,7 +65,6 @@ class TextFieldBase extends StatelessWidget {
               controller: controller,
               obscureText: obscureText!,
               onChanged: onChanged,
-              validator: validator,
               keyboardType: keyboardType,
               cursorColor: ColorApp.colorTitleBlue,
               style: TxtStyle.txt_robo_16_blue_w400,
@@ -78,16 +75,16 @@ class TextFieldBase extends StatelessWidget {
                   enabled: enable,
                   contentPadding:
                       const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
-                  focusedBorder: _borderFocus(errorText!),
-                  enabledBorder: _borderEnable(errorText!),
-                  border: _borderEnable(errorText!)),
+                  focusedBorder: _borderFocus(errorText),
+                  enabledBorder: _borderEnable(errorText),
+                  border: _borderEnable(errorText)),
               // keyboardType: TextInputType.number,
             ),
           ),
-          if (errorText != null)
+          if (errorText != '')
             Padding(
-              padding: const EdgeInsets.only(top: 4.0),
-              child: Text(errorText!,
+              padding: const EdgeInsets.only(top: 8.0),
+              child: Text(errorText,
                   style: enable ? TxtStyle.txt_robo_16_red_w400 : TxtStyle.txt_robo_16_grey_w400),
             )
         ],
@@ -98,7 +95,7 @@ class TextFieldBase extends StatelessWidget {
   InputBorder _borderFocus(String errorText) {
     return OutlineInputBorder(
         borderSide: BorderSide(
-            color: errorText != null ? ColorApp.colorTitleBlue : ColorApp.colorTitleRed,
+            color: errorText == '' ? ColorApp.colorTitleBlue : ColorApp.colorTitleRed,
             width: 2),
         borderRadius: BorderRadius.circular(16));
   }
@@ -106,7 +103,7 @@ class TextFieldBase extends StatelessWidget {
   InputBorder _borderEnable(String errorText) {
     return OutlineInputBorder(
         borderSide: BorderSide(
-            color: errorText != null
+            color: errorText == ''
                 ? ColorApp.colorTitleBlack.withOpacity(0.1)
                 : ColorApp.colorTitleRed,
             width: 1),
