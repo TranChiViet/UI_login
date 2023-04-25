@@ -8,7 +8,6 @@ import 'screens/forgot_password/cubit/forgot_password_cubit.dart';
 import 'screens/get_password/cubit/get_password_cubit.dart';
 import 'screens/otp/cubit/otp_cubit.dart';
 import 'screens/sign_in/cubit/sign_in_cubit.dart';
-import 'screens/sign_in/sign_in_page.dart';
 import 'screens/sign_up/cubit/sign_up_cubit.dart';
 
 void main() {
@@ -37,8 +36,6 @@ class MyApp extends StatelessWidget {
         ),
         home:
             SplashScreen(),
-            // SignInPage(),
-            // OtpPage(),
       ),
     );
   }
