@@ -12,6 +12,6 @@ class OtpCubit extends Cubit<OtpState> {
       }else{
         emit(ValidOtpState());
       }
-      emit(OtpInitial());
+      emit(SuccessState());
   }
 }

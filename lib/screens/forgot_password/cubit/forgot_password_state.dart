@@ -17,4 +17,6 @@ class InvalidPhoneState extends ForgotPasswordState {
 
 class ValidPhoneState extends ForgotPasswordState {}
 
+class SuccessState extends ForgotPasswordState {}
+
 class ForgotPasswordInitial extends ForgotPasswordState {}

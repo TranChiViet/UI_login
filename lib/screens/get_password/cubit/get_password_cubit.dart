@@ -15,6 +15,6 @@ class GetPasswordCubit extends Cubit<GetPasswordState> {
       emit(InvalidPasswordState('Xác nhận sai mật khẩu'));
     }
 
-    emit(GetPasswordInitial());
+    emit(SuccessState());
   }
 }

@@ -34,8 +34,8 @@ class _LanguageScreenState extends State<LanguageScreen> {
               padding: EdgeInsets.symmetric(vertical: 30.0),
               child: ImageLogo(),
             ),
-            Padding(
-              padding: const EdgeInsets.all(20.0),
+            const Padding(
+              padding: EdgeInsets.all(20.0),
               child: Text(
                 'Hiển Thị Ứng Dụng Bằng',
                 style: TxtStyle.txt_robo_20_blue_w600,
@@ -95,27 +95,17 @@ class _LanguageScreenState extends State<LanguageScreen> {
       bottomNavigationBar: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          const Expanded(
-            flex: 1,
-            child: SizedBox(),
-          ),
-          const Expanded(
-            flex: 3,
-            child: SizedBox(),
-          ),
-          Expanded(
-            flex: 1,
-            child: Padding(
-              padding: const EdgeInsets.only(top: 30, bottom: 20),
-              child: TextButtonBase(
-                  text: 'Tiếp tục',
-                  onPressed: () {
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const IntroScreen()));
-                  }),
-            ),
+          const Spacer(),
+          Padding(
+            padding: const EdgeInsets.only(right: 20.0),
+            child: TextButtonBase(
+                text: 'Tiếp tục',
+                onPressed: () {
+                  Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const IntroScreen()));
+                }),
           ),
         ],
       ),

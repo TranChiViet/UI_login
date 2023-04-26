@@ -4,7 +4,6 @@ import 'package:first_project/constant/constant_export.dart';
 import 'package:flutter/material.dart';
 
 import '../../widgets/image_logo.dart';
-import 'intro.dart';
 import 'language.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -18,7 +17,8 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     Timer(const Duration(milliseconds: 1500), () {
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=> LanguageScreen()));
+      Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (context) => const LanguageScreen()));
     });
     super.initState();
   }

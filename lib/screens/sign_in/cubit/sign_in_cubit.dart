@@ -7,10 +7,12 @@ class SignInCubit extends Cubit<SignInState> {
   SignInCubit() : super(SignInInitial());
 
   void signin(String phone, String password) {
+    String pattern = r'(^(?:[+0]9)?[0-9]{10,12}$)';
+    RegExp regExp = new RegExp(pattern);
     if(phone.isEmpty){
         emit(InvalidPhoneState('Vui lòng nhập số điện thoại'));
-      } else if(phone.isNotEmpty && phone.length < 10){
-        emit(InvalidPhoneState('Số điện thoại chứa ít nhất 10 kí tự'));
+      } else if(!regExp.hasMatch(phone)){
+        emit(InvalidPhoneState('Số điện thoại không tồn tại'));
       } else
       if(password.isEmpty){
         emit(InvalidPasswordState('Vui lòng nhập mật khẩu'));
@@ -18,6 +20,6 @@ class SignInCubit extends Cubit<SignInState> {
       if(password.isNotEmpty && password.length < 8){
         emit(InvalidPasswordState('Mật khẩu chứa ít nhất 8 kí tự'));
       }
-      emit(SignInInitial());
+      emit(SuccessState());
   }
 }

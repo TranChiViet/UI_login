@@ -23,4 +23,6 @@ class InvalidPasswordState extends SignInState {
   List<Object> get props => [content];
 }
 
+class SuccessState extends SignInState {}
+
 class SignInInitial extends SignInState {}

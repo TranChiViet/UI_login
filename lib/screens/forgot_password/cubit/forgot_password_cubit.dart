@@ -7,13 +7,15 @@ class ForgotPasswordCubit extends Cubit<ForgotPasswordState> {
   ForgotPasswordCubit() : super(ForgotPasswordInitial());
 
   void forgotPassword(String phone) {
+    String pattern = r'(^(?:[+0]9)?[0-9]{10,12}$)';
+    RegExp regExp = new RegExp(pattern);
     if(phone.isEmpty){
         emit(InvalidPhoneState('Vui lòng nhập số điện thoại'));
-      } else if(phone.isNotEmpty && phone.length<10){
-        emit(InvalidPhoneState('Số điện thoại chứa ít nhất 10 kí tự'));
+      } else if(!regExp.hasMatch(phone)){
+        emit(InvalidPhoneState('Số điện thoại không tồn tại'));
       }else{
         emit(ValidPhoneState());
       }
-      emit(ForgotPasswordInitial());
+      emit(SuccessState());
   }
 }

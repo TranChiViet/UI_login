@@ -3,14 +3,9 @@ import 'package:first_project/widgets/image_base.dart';
 import 'package:flutter/material.dart';
 
 import '../../models/intro.dart';
-import '../../widgets/back_txt_btn_base.dart';
-import '../../widgets/elevated_button_base.dart';
 import '../../widgets/image_logo.dart';
-import '../../widgets/otp_base.dart';
 import '../../widgets/text_button_base.dart';
-import '../../widgets/text_field_base.dart';
 import '../sign_in/sign_in_page.dart';
-
 
 class IntroScreen extends StatefulWidget {
   const IntroScreen({super.key});
@@ -100,26 +95,23 @@ class _IntroScreenState extends State<IntroScreen> {
           ),
           Expanded(
             flex: 3,
-            child: Padding(
-              padding: const EdgeInsets.only(top: 30, bottom: 20),
-              child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: List.generate(3, (index) {
-                    return Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 2),
-                        child: AnimatedContainer(
-                          duration: const Duration(milliseconds: 500),
-                          curve: Curves.easeInCubic,
-                          height: 10,
-                          width: _indexPage == index ? 20 : 10,
-                          decoration: BoxDecoration(
-                              color: _indexPage == index
-                                  ? ColorApp.colorTitleBlue
-                                  : ColorApp.colorTitleGrey,
-                              borderRadius: BorderRadius.circular(10)),
-                        ));
-                  })),
-            ),
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: List.generate(3, (index) {
+                  return Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 2),
+                      child: AnimatedContainer(
+                        duration: const Duration(milliseconds: 500),
+                        curve: Curves.easeInCubic,
+                        height: 10,
+                        width: _indexPage == index ? 20 : 10,
+                        decoration: BoxDecoration(
+                            color: _indexPage == index
+                                ? ColorApp.colorTitleBlue
+                                : ColorApp.colorTitleGrey,
+                            borderRadius: BorderRadius.circular(10)),
+                      ));
+                })),
           ),
           Expanded(
             flex: 1,

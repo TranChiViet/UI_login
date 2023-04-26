@@ -17,4 +17,6 @@ class InvalidOtpState extends OtpState {
 
 class ValidOtpState extends OtpState {}
 
+class SuccessState extends OtpState {}
+
 class OtpInitial extends OtpState {}
