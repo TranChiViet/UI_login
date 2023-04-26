@@ -96,17 +96,14 @@ class _LanguageScreenState extends State<LanguageScreen> {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           const Spacer(),
-          Padding(
-            padding: const EdgeInsets.only(right: 20.0),
-            child: TextButtonBase(
-                text: 'Tiếp tục',
-                onPressed: () {
-                  Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const IntroScreen()));
-                }),
-          ),
+          TextButtonBase(
+              text: 'Tiếp tục',
+              onPressed: () {
+                Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const IntroScreen()));
+              }),
         ],
       ),
     );
